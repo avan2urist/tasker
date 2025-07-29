@@ -12,14 +12,15 @@ class UserOrm(Base):
     id: Mapped[int] = mapped_column(
         primary_key=True,
         autoincrement=True,
-        nullable=False
+        nullable=False,
+        unique=True
     )
 
     id_tg: Mapped[str] = mapped_column(
         String(250),
         unique=True,
         nullable=False
-)
+    )
 
     invite_date: Mapped[datetime] = mapped_column(
         DateTime(timezone=None),
@@ -31,18 +32,27 @@ class UserOrm(Base):
         default=False
     )
 
-class AdminOrm(Base):
+class ProductOrm(Base):
 
-    __tablename__ = "admins"
+    __tablename__ = "Product"
 
     id: Mapped[int] = mapped_column(
         primary_key=True,
         autoincrement=True,
-        nullable=False
+        nullable=False,
+        unique=True
     )
 
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("admins.id", ondelete="CASCADE")
+        ForeignKey("users.id", ondelete="CASCADE"),
+        nullable=False
     )
+
+    name: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        unique=True
+    )
+    
 
 

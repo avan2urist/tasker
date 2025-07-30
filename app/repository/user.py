@@ -6,4 +6,4 @@ from app.schema.user import UserLoginSchema
 class UserRepository:
 
     def create_ser(self, username: str, password: str) -> User:
-        
+        pass

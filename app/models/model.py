@@ -1,8 +1,8 @@
-from datetime import datetime
+
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db.database import Base
 from sqlalchemy import (
-    String, DateTime, Boolean, ForeignKey
+    String, ForeignKey
 )
 
 class UserOrm(Base):
@@ -15,21 +15,23 @@ class UserOrm(Base):
         nullable=False
     )
 
-    id_tg: Mapped[str] = mapped_column(
-        String(250),
+    username: Mapped[str] = mapped_column(
+        String(60),
         unique=True,
         nullable=False
     )
 
-    invite_date: Mapped[datetime] = mapped_column(
-        DateTime(timezone=None),
-        default=lambda: datetime.now()
+    password: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False
     )
 
-    is_leaved: Mapped[bool] = mapped_column(
-        Boolean,
-        default=False
+    access_token: Mapped[str] = mapped_column(
+        String(355),
+        nullable=False
     )
+
+    
 
 class ProductOrm(Base):
 

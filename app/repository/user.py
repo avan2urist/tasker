@@ -9,11 +9,13 @@ class UserRepository:
         self.session = session
 
     async def create_user(
+            
             self, 
             username: str, 
             password: str,
             access_token: str
-            ) -> UserOrm:
+
+    ) -> UserOrm:
         
         query = (
 
@@ -30,12 +32,14 @@ class UserRepository:
 
         return result.scalar_one()
     
-    async def get_user_by_id(
+    async def get_user_by_username(
+            
             self,
-            user_id: int
+            username: str
+
     ) -> UserOrm | None:
         
-        query = select(UserOrm).where(UserOrm.id == user_id)
+        query = select(UserOrm).where(UserOrm.username == username)
 
         result = await self.session.execute(query)
 
